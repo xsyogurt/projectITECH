@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <div class="container">
+
+        <!-- (1) Panel showing the rmc_student table -->
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    Student list
+                </div>
+                <div class="panel-body">
+                    <p>All students who have made course reviews are listed as follows:</p>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Student name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Entry year</th>
+                        <th>Degree programme</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <!-- (2) Receives data from the back-end -->
+                    {% for obj in queryset %}
+                        <tr>
+                            {% for student in students_review %}
+                                {% if student.student_id == obj.id %}
+                                    <th scope="row">{{ obj.id }}</th>
+                                    <td>{{ obj.email }}</td>
+                                    <td>{{ obj.name }}</td>
+                                    <td>{{ obj.get_gender_display }}</td>
+                                    <td>{{ obj.age }}</td>
+                                    <td>{{ obj.entry_date|date:"Y" }}</td>
+                                    <td>{{ obj.degree_programme.name }}</td>
+                                    <td>
+                                        <a class="btn btn-success btn-xs" href="/{{ obj.id }}/view-reviews-student/">View reviews</a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+

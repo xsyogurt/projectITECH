@@ -1,0 +1,52 @@
+{% extends "student-layout.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <!-- My Course Comment -->
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                My Course Comment
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="text-align: center">Course Name</th>
+                    <th style="text-align: center">easiness</th>
+                    <th style="text-align: center">interest</th>
+                    <th style="text-align: center">usefulness</th>
+                    <th style="text-align: center">teaching</th>
+                    <th style="text-align: center">overall</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center">
+
+                <!-- queryset is a list of CourseComment objects -->
+                {% for obj in queryset %}
+                    <tr>
+                        <td>{{ obj.course_id.name }}</td>
+                        <td>{{ obj.easiness_score }}</td>
+                        <td>{{ obj.interest_score }}</td>
+                        <td>{{ obj.usefulness_score }}</td>
+                        <td>{{ obj.teaching_score }}</td>
+                        <td>{{ obj.overall_score }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ tpl_pagination_navbar }}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

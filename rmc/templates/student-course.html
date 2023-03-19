@@ -1,0 +1,94 @@
+{% extends "student-layout.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                Course List
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Add comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Loop through the queryset and display the data -->
+                {% for obj in queryset %}
+                    <tr>
+                        <th>{{ obj.name }}</th>
+                        <td>
+                            <!-- If the course is commented, the button is disabled -->
+                            <input onclick="bindBtnAddEvent({{ obj.id }})"
+                                   type="button"
+                                   class="btn btn-primary btn-xs"
+                                    {% if obj.isComment == 1 %}
+                                   disabled="disabled"
+                                    {% endif %}
+                                   value="comment">
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ tpl_pagination_navbar }}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Comment Box -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add Comment</h4>
+                </div>
+                <div class="modal-body">
+
+                    <!-- Use the form to submit the data -->
+                    <form id="formAdd">
+                        <div class="clearfix">
+                            {% for field in course %}
+                                <div class="col-xs-12">
+                                    <div class="form-group" style="position: relative;margin-bottom: 20px;">
+                                        <label>{{ field.label }}</label>
+                                        {{ field }}
+                                        <span class="error-msg" style="color: red;position: absolute;"></span>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="btnSave" type="button" class="btn btn-primary" onclick="doAdd()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <!--Import the student_course.js file and use ajax for form submission-->
+    <script src="{% static 'js/student_course.js' %}"></script>
+
+{% endblock %}

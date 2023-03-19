@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout-style.css' %}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-default">
+    <div class="container">
+
+        <!-- Navbar header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">UofG RateMyCourses</a>
+        </div>
+
+        <!-- Navbar menu -->
+        <div class="collapse navbar-collapse" id="navbar-menu">
+            <ul class="nav navbar-nav">
+                <li><a href="/data-visualisation/">Data Visualisation<span class="sr-only">(current)</span></a></li>
+                <li><a href="/course-management/">Course Management</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">View Reviews<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/course-list/">View Reviews by Course</a></li>
+                        <li><a href="/student-list/">View Reviews by Student</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">{{ request.session.info.name }}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/{{ request.session.info.id }}/staff-reset/">Password Reset</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/staff-logout/">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Content area -->
+<div>
+    {% block content %}{% endblock %}
+</div>
+
+<script src="{% static 'js/jquery-3.6.3.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

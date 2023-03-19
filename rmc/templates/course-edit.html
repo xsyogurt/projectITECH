@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Edit a course</h3>
+            </div>
+            <div class="panel-body">
+
+                <!-- Input form -->
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Gets database data and generates input boxes -->
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                            <span class="errors">{{ field.errors.0 }}</span>
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

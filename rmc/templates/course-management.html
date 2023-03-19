@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <div class="container">
+        <!-- (5) New button -->
+        <div class="new-btn-area">
+            <a class="btn btn-primary" href="/course-add/">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                New
+            </a>
+        </div>
+
+        <!-- (1) Panel showing the rmc_course table -->
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    Course list
+                </div>
+                <div class="panel-body">
+                    <p>All courses are listed as follows:</p>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Course name</th>
+                        <th>Associated degree programmes</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <!-- (2) Receives data from the back-end -->
+                    {% for obj in queryset %}
+                        <tr>
+                            <th scope="row">{{ obj.id }}</th>
+                            <td>{{ obj.name }}</td>
+                            <td>
+                                {% for degree_programme in obj.associated_degree_programmes.all %}
+                                    {{ degree_programme.name }}
+                                    {% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+
+                            <td>
+                                <a class="btn btn-primary btn-xs" href="/{{ obj.id }}/course-edit/">Edit</a>
+                                <a class="btn btn-danger btn-xs"
+                                   href="/{{ obj.id }}/course-delete/">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- (3) Pagination -->
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ tpl_pagination_navbar }}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <div class="container">
+
+    <!-- (1) Panel showing the charts -->
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                Course review visualisation
+            </div>
+            <div class="panel-body">
+                <p>All charts are listed as follows:</p>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="/static/img/gender-distribution-socs.png" alt="...">
+                        <div class="caption">
+                            <h3>Gender Distribution in SoCS</h3>
+                            <p>Displays the gender distribution in the School of Computing Science </p>
+                            <p><a href="/data-visualisation/gender-distribution-socs/" class="btn btn-primary" role="button">View</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="/static/img/degree-programme-enrolment.png" alt="...">
+                        <div class="caption">
+                            <h3>Degree Programme Enrolment</h3>
+                            <p>Displays the number of students in each degree programme</p>
+                            <p><a href="/data-visualisation/degree-programme-enrolment/" class="btn btn-primary" role="button">View</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+    <div class="container">
+
+        <!-- (1) Panel showing the rmc_coursereview table -->
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    View reviews by course
+                </div>
+                <div class="panel-body">
+                    <p>All reviews of {{ course_name }} are listed below:</p>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Student name</th>
+                        <th>Overall score</th>
+                        <th>Easiness score</th>
+                        <th>Interest score</th>
+                        <th>Usefulness score</th>
+                        <th>Teaching score</th>
+                        <th>Comment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <!-- (2) Receives data from the back-end -->
+                    {% for obj in queryset %}
+                        <tr>
+                            <th scope="row">{{ obj.student_id.name }}</th>
+                            <td>{{ obj.overall_score }}</td>
+                            <td>{{ obj.easiness_score }}</td>
+                            <td>{{ obj.interest_score }}</td>
+                            <td>{{ obj.usefulness_score }}</td>
+                            <td>{{ obj.teaching_score }}</td>
+                            <td>{{ obj.comment }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="clearfix">
+            <ul class="pagination">
+                {{ tpl_pagination_navbar }}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+
+
